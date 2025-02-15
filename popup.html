@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Search Link Generator</title>
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Infant:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f7f7f7;
+      margin: 0;
+      padding: 20px;
+    }
+    .container {
+      max-width: 360px;
+      margin: auto;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+    }
+    .input-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+    /* Buat lebar fix pada input jumlah & ID biar gak melar */
+    #jumlahInput {
+      font-family: 'Poppins', sans-serif;
+      width: 50px;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+    #idInput {
+      font-family: 'Poppins', sans-serif;
+      width: 80px;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+    .input-container button {
+      font-family: 'Poppins', sans-serif;
+      padding: 10px 16px;
+      font-size: 16px;
+      background: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .input-container button:hover {
+      background: #0056b3;
+    }
+    h3 {
+      margin: 0 0 10px 0;
+      font-size: 18px;
+      color: #333;
+    }
+    #linkList {
+      max-height: 150px;
+      overflow-y: auto;
+      border: 1px solid #ddd;
+      background: #fafafa;
+      border-radius: 4px;
+      padding: 10px;
+      margin-bottom: 15px;
+      font-size: 14px;
+      color: #333;
+    }
+    #linkList ul {
+      list-style-type: none;
+      padding-left: 0;
+      margin: 0;
+    }
+    #linkList li {
+      margin-bottom: 5px;
+      word-break: break-all;
+    }
+    button#nextSearch {
+      font-family: 'Poppins', sans-serif;
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      background: #28a745;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button#nextSearch:hover {
+      background: #218838;
+    }
+    button#nextSearch:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Baris input: INPUT JUMLAH, ID, SAVE (horizontal) -->
+    <div class="input-container">
+      <input type="number" id="jumlahInput" placeholder="JUMLAH LINK" value="30" min="1" max="1000">
+      <input type="text" id="idInput" placeholder="ID" maxlength="6">
+      <button id="saveBtn">SAVE</button>
+    </div>
+
+    <h3>LIST GENERATED LINK</h3>
+    <div id="linkList">
+      <p>Tidak ada link yang digenerate.</p>
+    </div>
+
+    <button id="nextSearch" disabled>BUKA LINK</button>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "Auto Search",
+  "version": "1.0",
+  "description": "Ekstensi untuk GB Poin Bing Search by @rifkydelta.",
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "tabs",
+    "storage"
+  ]
+}
