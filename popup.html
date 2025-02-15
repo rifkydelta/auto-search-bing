@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>Search Link Generator</title>
-  <!-- Google Font -->
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Infant:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
@@ -28,8 +28,8 @@
       gap: 10px;
       margin-bottom: 15px;
     }
-    /* Buat lebar fix pada input jumlah & ID biar gak melar */
-    #jumlahInput {
+    /* Set fixed width for the amount and Form ID inputs */
+    #amountInput {
       font-family: 'Poppins', sans-serif;
       width: 50px;
       padding: 10px;
@@ -37,7 +37,7 @@
       border: 1px solid #ddd;
       border-radius: 4px;
     }
-    #idInput {
+    #formIdInput {
       font-family: 'Poppins', sans-serif;
       width: 80px;
       padding: 10px;
@@ -83,21 +83,31 @@
       margin-bottom: 5px;
       word-break: break-all;
     }
-    button#nextSearch {
+    button#nextSearch,
+    button#runBot {
       font-family: 'Poppins', sans-serif;
       width: 100%;
       padding: 10px;
       font-size: 16px;
-      background: #28a745;
-      color: #fff;
+      color: #ffffff;
       border: none;
       border-radius: 4px;
       cursor: pointer;
     }
+    button#nextSearch {
+      background: #28a745;
+    }
     button#nextSearch:hover {
       background: #218838;
     }
-    button#nextSearch:disabled {
+    button#runBot {
+      background: #dc3545;
+      margin-top: 10px;
+    }
+    button#runBot:hover {
+      background: #c82333;
+    }
+    button:disabled {
       background: #ccc;
       cursor: not-allowed;
     }
@@ -105,19 +115,20 @@
 </head>
 <body>
   <div class="container">
-    <!-- Baris input: INPUT JUMLAH, ID, SAVE (horizontal) -->
+    <!-- Input row: Amount, Form ID, SAVE -->
     <div class="input-container">
-      <input type="number" id="jumlahInput" placeholder="JUMLAH LINK" value="30" min="1" max="1000">
-      <input type="text" id="idInput" placeholder="ID" maxlength="6">
+      <input type="number" id="amountInput" placeholder="LINK AMOUNT" value="30" min="1" max="1000">
+      <input type="text" id="formIdInput" placeholder="FORM ID" maxlength="6">
       <button id="saveBtn">SAVE</button>
     </div>
 
-    <h3>LIST GENERATED LINK</h3>
+    <h3>GENERATED LINK LIST</h3>
     <div id="linkList">
-      <p>Tidak ada link yang digenerate.</p>
+      <p>No generated links available.</p>
     </div>
 
-    <button id="nextSearch" disabled>BUKA LINK</button>
+    <button id="nextSearch" disabled>OPEN LINK</button>
+    <button id="runBot" disabled>RUN BOT</button>
   </div>
 
   <script src="popup.js"></script>

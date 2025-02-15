@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "Auto Search",
-  "version": "1.0",
-  "description": "Ekstensi untuk GB Poin Bing Search by @rifkydelta.",
+  "version": "1.1",
+  "description": "Extension for farming Bing Search Points by @rifkydelta.",
   "action": {
     "default_popup": "popup.html"
   },

@@ -1,11 +1,12 @@
 let generatedLinks = [];
 
-// Fungsi untuk update tampilan daftar link di popup
+// Function to update the display of the generated links in the popup
 function updateLinkListDisplay() {
   const linkListDiv = document.getElementById("linkList");
   if (generatedLinks.length === 0) {
-    linkListDiv.innerHTML = "<p>Tidak ada link yang digenerate.</p>";
+    linkListDiv.innerHTML = "<p>No generated links available.</p>";
     document.getElementById("nextSearch").disabled = true;
+    document.getElementById("runBot").disabled = true;
     return;
   }
   let html = "<ul>";
@@ -15,16 +16,17 @@ function updateLinkListDisplay() {
   html += "</ul>";
   linkListDiv.innerHTML = html;
   document.getElementById("nextSearch").disabled = false;
+  document.getElementById("runBot").disabled = false;
 }
 
-// Fungsi untuk menyimpan link ke chrome.storage
+// Function to save links to chrome.storage
 function saveLinksToStorage() {
   chrome.storage.local.set({ generatedLinks: generatedLinks }, function() {
-    // Link sudah tersimpan
+    // Links have been saved
   });
 }
 
-// Fungsi untuk load link dari chrome.storage
+// Function to load links from chrome.storage
 function loadLinksFromStorage() {
   chrome.storage.local.get(["generatedLinks"], function(result) {
     if (result.generatedLinks && Array.isArray(result.generatedLinks)) {
@@ -34,7 +36,7 @@ function loadLinksFromStorage() {
   });
 }
 
-// Array kata-kata umum dalam bahasa Indonesia (1 kata per item)
+// Array of common Indonesian words (one word per item)
 const commonWords = [
   "cara", "membuat", "terbaik", "murah", "gratis", "tutorial", "ulasan", "tips", "panduan",
   "contoh", "resep", "layanan", "online", "unduh", "download", "update", "baru", "terkini",
@@ -91,53 +93,47 @@ const commonWords = [
   "digital", "influencer", "iklan", "media", "sosial", "dropshipping",
   "e-commerce", "marketplace", "toko", "website", "SEO", "trafik",
   "iklan", "facebook", "google", "instagram", "tiktok", "youtube",
-  "konten", "viral", "engagement", "monetisasi", "strategi", "produk",
-  "tren", "terbaru", "teknologi", "tren", "masa", "depan", "eksperimen",
-  "AI", "robot", "otomatisasi", "blockchain", "cyber", "security",
-  "hacking", "teknologi", "tren", "produk", "smartphone", "kamera",
-  "laptop", "PC", "gaming", "console", "game", "e-sports", "streaming",
-  "konten", "creator", "video", "editing", "podcast", "monetisasi"
+  "konten", "viral", "engagement", "monetisasi"
 ];
 
-// Fungsi untuk generate link dengan kata per link acak (3-5 kata)
+// Function to generate links with a random query of 3-5 words per link
 function generateLinks(num, formID) {
   let links = [];
   for (let i = 0; i < num; i++) {
-    // Tentukan jumlah kata antara 3 sampai 5
-    const wordsCount = Math.floor(Math.random() * 3) + 3;  // Random: 3,4,5
+    // Determine a random number of words between 3 and 5 (Random: 3, 4, or 5)
+    const wordsCount = Math.floor(Math.random() * 3) + 3;
     let linkWords = [];
     for (let j = 0; j < wordsCount; j++) {
       const randIndex = Math.floor(Math.random() * commonWords.length);
       linkWords.push(commonWords[randIndex]);
     }
-    // Encode setiap kata dan gabung dengan tanda '+'
+    // Encode each word and join them with '+'
     const query = linkWords.map(word => encodeURIComponent(word)).join("+");
     links.push(`https://bing.com/search?q=${query}&qs=PN&form=${encodeURIComponent(formID)}`);
   }
   return links;
 }
-
-// Event listener untuk tombol SAVE
+// Event listener for the SAVE button
 document.getElementById("saveBtn").addEventListener("click", () => {
-  const jumlah = parseInt(document.getElementById("jumlahInput").value, 10);
-  const formID = document.getElementById("idInput").value.trim();
+  const amount = parseInt(document.getElementById("amountInput").value, 10);
+  const formID = document.getElementById("formIdInput").value.trim();
 
-  if (!jumlah || jumlah < 1) {
-    alert("Masukin jumlah link yang valid!");
+  if (!amount || amount < 1) {
+    alert("Please enter a valid number of links!");
     return;
   }
   if (!formID) {
-    alert("Masukin ID search yang valid!");
+    alert("Please enter a valid search ID!");
     return;
   }
 
-  generatedLinks = generateLinks(jumlah, formID);
+  generatedLinks = generateLinks(amount, formID);
   saveLinksToStorage();
   updateLinkListDisplay();
-  alert(`Berhasil generate ${jumlah} link!`);
+  alert(`Successfully generated ${amount} links!`);
 });
 
-// Event listener untuk tombol BUKA LINK
+// Event listener for the OPEN LINK button
 document.getElementById("nextSearch").addEventListener("click", () => {
   if (generatedLinks.length > 0) {
     const link = generatedLinks.shift();
@@ -145,10 +141,33 @@ document.getElementById("nextSearch").addEventListener("click", () => {
     saveLinksToStorage();
     updateLinkListDisplay();
   } else {
-    alert("Wah, semua link udah kebuka! Generate ulang link.");
+    alert("Wow, all links have been opened! Please generate new links.");
     document.getElementById("nextSearch").disabled = true;
+    document.getElementById("runBot").disabled = true;
   }
 });
 
-// Load link saat popup dibuka
+// Event listener for the RUN BOT button
+document.getElementById("runBot").addEventListener("click", () => {
+  runBot();
+});
+
+// Function to run the bot that automatically opens links with a random delay
+function runBot() {
+  if (generatedLinks.length > 0) {
+    const link = generatedLinks.shift();
+    chrome.tabs.update({ url: link });
+    saveLinksToStorage();
+    updateLinkListDisplay();
+    // Random delay between 3000ms and 6000ms
+    const delay = Math.floor(Math.random() * (6000 - 3000 + 1)) + 3000;
+    setTimeout(runBot, delay);
+  } else {
+    alert("Wow, all links have been opened! Please generate new links.");
+    document.getElementById("nextSearch").disabled = true;
+    document.getElementById("runBot").disabled = true;
+  }
+}
+
+// Load links when the popup is opened
 loadLinksFromStorage();

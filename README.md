@@ -17,7 +17,8 @@ This Chrome extension is designed to automate Bing searches so you can earn Micr
   Generated links are saved using `chrome.storage.local` so they remain even if the popup is closed.
 - **Single-Tab Navigation 🔥**  
   Search queries open in the same active tab, keeping your browser window uncluttered.
-
+- **100% Hands-Free Automation 🤖**  
+  Sit back and relax—let the bot handle everything for you, no clicks needed!
 ## Installation ⚙️
 
 1. **Clone or Download the Repository:**
