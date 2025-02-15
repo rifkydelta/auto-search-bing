@@ -154,13 +154,16 @@ document.getElementById("runBot").addEventListener("click", () => {
 
 // Function to run the bot that automatically opens links with a random delay
 function runBot() {
+  // Update the link list display
+  const minDelay = 5000;
+  const maxDelay = 8000;
+
   if (generatedLinks.length > 0) {
     const link = generatedLinks.shift();
     chrome.tabs.update({ url: link });
     saveLinksToStorage();
     updateLinkListDisplay();
-    // Random delay between 3000ms and 6000ms
-    const delay = Math.floor(Math.random() * (6000 - 3000 + 1)) + 3000;
+    const delay = Math.floor(Math.random() * (maxDelay - minDelay + 1)) + minDelay;
     setTimeout(runBot, delay);
   } else {
     alert("Wow, all links have been opened! Please generate new links.");

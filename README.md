@@ -1,6 +1,6 @@
 # Microsoft Rewards Bing Search Automation Extension 🚀
 
-This Chrome extension is designed to automate Bing searches so you can earn Microsoft Rewards more easily. By using a list of random Indonesian words, the extension generates varied search queries (3–5 words per query) and opens each query sequentially in the same active tab.
+This Chromium extension is designed to automate Bing searches so you can earn Microsoft Rewards more easily. By using a list of random Indonesian words, the extension generates varied search queries (3–5 words per query) and opens each query sequentially in the same active tab.
 
 > **⚠️ WARNING:**  
 > Using this extension to automate searches for earning Microsoft Rewards may violate Microsoft’s policies. Use this extension at your own risk and responsibility. Always comply with the applicable terms and conditions.
@@ -18,7 +18,7 @@ This Chrome extension is designed to automate Bing searches so you can earn Micr
 - **Single-Tab Navigation 🔥**  
   Search queries open in the same active tab, keeping your browser window uncluttered.
 - **100% Hands-Free Automation 🤖**  
-  Sit back and relax—let the bot handle everything for you, no clicks needed! It will automatically perform a search within a time range of 3000ms to 6000ms.
+  Sit back and relax—let the bot handle everything for you, no clicks needed! It will automatically perform a search within a time range of 5000ms to 8000ms.
 ## Installation ⚙️
 
 1. **Clone or Download the Repository:**
